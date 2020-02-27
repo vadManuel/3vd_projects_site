@@ -1,61 +1,62 @@
 import * as helper from './helper'
+import { db } from '../../config/config'
+import firebase from 'firebase/app'
 
-export const createProject = ({ project }) => {
-    return (dispatch, getState, { getFirestore }) => {
+export const createProject = (project) => {
+    return (dispatch) => {
+        dispatch(helper.loadingProjectStarted())
         console.log('Creating a project...')
-        dispatch(helper.loadingProjectStarted())
 
-        const db = getFirestore()
-        let projectRef = db.collection('projects').doc()
-        const id = projectRef.id
-
-        projectRef.set({
+        let ref = db.collection('projects').doc()
+        const newProject = {
             ...project,
-            id
-        }).then(res => {
+            id: ref.id,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+        }
+
+        ref.set(newProject).then(() => {
+            dispatch(helper.createProjectSuccess(newProject))
             console.log('Project creation successful!')
-            dispatch(helper.createProjectSuccess(res.data))
         }).catch(err => {
-            console.log('Project creation unsuccessful!')
             dispatch(helper.createProjectFailure(err.message))
+            console.log('Project creation unsuccessful!')
         })
     }
 }
 
-export const deleteProject = ({ project }) => {
-    return (dispatch, getState, { getFirestore }) => {
+export const deleteProject = (project) => {
+    return (dispatch) => {
+        dispatch(helper.loadingProjectStarted())
         console.log('Deleting a project...')
-        dispatch(helper.loadingProjectStarted())
 
-        const db = getFirestore()
-        let projectRef = db.collection('projects').doc(project.id)
+        let ref = db.collection('projects').doc(project.id)
 
-        projectRef.delete().then(res => {
+        ref.delete().then(() => {
+            dispatch(helper.deleteProjectSuccess(project))
             console.log('Project deletion successful!')
-            dispatch(helper.deleteProjectSuccess(res.data))
         }).catch(err => {
-            console.log('Project deletion unsuccessful!')
             dispatch(helper.deleteProjectFailure(err.message))
+            console.log('Project deletion unsuccessful!')
         })
     }
 }
 
-export const updateProject = ({ project }) => {
-    return (dispatch, getState, { getFirestore }) => {
-        console.log('Updating a project...')
+export const updateProject = (project) => {
+    return (dispatch) => {
         dispatch(helper.loadingProjectStarted())
+        console.log('Updating a project...')
 
-        const db = getFirestore()
-        let projectRef = db.collection('projects').doc(project.id)
+        console.log('yeet',project)
+        let ref = db.collection('projects').doc(project.id)
 
-        projectRef.set({
+        ref.update({
             ...project
-        }).then(res => {
+        }).then(() => {
+            dispatch(helper.updateProjectSuccess(project))
             console.log('Project update successful!')
-            dispatch(helper.updateProjectSuccess(res.data))
         }).catch(err => {
-            console.log('Project update unsuccessful!')
             dispatch(helper.updateProjectFailure(err.message))
+            console.log('Project update unsuccessful!')
         })
     }
 }

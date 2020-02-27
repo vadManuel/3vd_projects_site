@@ -5,83 +5,59 @@ import {
     DELETE_PROJECT_SUCCESS,
     DELETE_PROJECT_FAILURE,
     UPDATE_PROJECT_SUCCESS,
-    UPDATE_PROJECT_FAILURE,
-   
-    LOADING_CONSTRUCTION_ESTIMATE_STARTED,
-    CREATE_CONSTRUCTION_ESTIMATE_SUCCESS,
-    CREATE_CONSTRUCTION_ESTIMATE_FAILURE,
-    DELETE_CONSTRUCTION_ESTIMATE_SUCCESS,
-    DELETE_CONSTRUCTION_ESTIMATE_FAILURE,
-    UPDATE_CONSTRUCTION_ESTIMATE_SUCCESS,
-    UPDATE_CONSTRUCTION_ESTIMATE_FAILURE,
+    UPDATE_PROJECT_FAILURE
 } from './types'
 
 // PROJECT HELPERS
-export const loadingProjectStarted = () => ({
-    type: LOADING_PROJECT_STARTED
-})
+export const loadingProjectStarted = () => {
+    console.log('Helping: Project started loading')
+    return {
+        type: LOADING_PROJECT_STARTED
+    }
+}
 
-export const createProjectSuccess = (project) => ({
-    type: CREATE_PROJECT_SUCCESS,
-    ...project
-})
+export const createProjectSuccess = (project) => {
+    console.log('Helping: Project successfully created!')
+    console.log('increateproject', project)
+    return {
+        type: CREATE_PROJECT_SUCCESS,
+        payload: {
+            project
+        }
+    }
+}
 
 export const createProjectFailure = (error) => ({
     type: CREATE_PROJECT_FAILURE,
-    error
+    payload: {
+        error
+    }
 })
 
 export const deleteProjectSuccess = (project) => ({
-    type: DELETE_PROJECT_SUCCESS, 
-    ...project
+    type: DELETE_PROJECT_SUCCESS,
+    payload: {
+        project
+    }
 })
 
 export const deleteProjectFailure = (error) => ({
     type: DELETE_PROJECT_FAILURE,
-    error
+    payload: {
+        error
+    }
 })
 
 export const updateProjectSuccess = (project) => ({
-    type: UPDATE_PROJECT_SUCCESS, 
-    ...project
+    type: UPDATE_PROJECT_SUCCESS,
+    payload: {
+        project
+    }
 })
 
 export const updateProjectFailure = (error) => ({
     type: UPDATE_PROJECT_FAILURE,
-    error
-})
-
-// CONSTRUCTION ESTIMATE HELPERS
-export const loadingConstructionEstimateStarted = () => ({
-    type: LOADING_CONSTRUCTION_ESTIMATE_STARTED
-})
-
-export const createConstructionEstimateSuccess = (cell) => ({
-    type: CREATE_CONSTRUCTION_ESTIMATE_SUCCESS,
-    ...cell
-})
-
-export const createConstructionEstimateFailure = (error) => ({
-    type: CREATE_CONSTRUCTION_ESTIMATE_FAILURE,
-    error
-})
-
-export const deleteConstructionEstimateSuccess = (cell) => ({
-    type: DELETE_CONSTRUCTION_ESTIMATE_SUCCESS, 
-    ...cell
-})
-
-export const deleteConstructionEstimateFailure = (error) => ({
-    type: DELETE_CONSTRUCTION_ESTIMATE_FAILURE,
-    error
-})
-
-export const updateConstructionEstimateSuccess = (cell) => ({
-    type: UPDATE_CONSTRUCTION_ESTIMATE_SUCCESS, 
-    ...cell
-})
-
-export const updateConstructionEstimateFailure = (error) => ({
-    type: UPDATE_CONSTRUCTION_ESTIMATE_FAILURE,
-    error
+    payload: {
+        error
+    }
 })
