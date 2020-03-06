@@ -13,30 +13,29 @@ import { firestoreConnect } from 'react-redux-firebase'
 import { MobileView, BrowserView } from 'react-device-detect'
 // import { mobileCheck } from './utils/funcs'
 import './styles.css'
-import 'react-data-grid/dist/react-data-grid.css'
+import Container from '@material-ui/core/Container'
 
 class App extends React.Component {
     render() {
         return (
-            <Foo />
-            // <Router>
-            //     <div>
-            //         <MobileView>
-            //             <h3>Mobile Navbar</h3>
-            //             <Switch>
-            //                 <Route exact path='/' component={Test} />
-            //                 <Route default component={() => <h3>Page Not Found</h3>} />
-            //             </Switch>
-            //         </MobileView>
-            //         <BrowserView>
-            //             <h3>Browser Navbar</h3>
-            //             <Switch>
-            //                 <Route exact path='/' component={Foo} />
-            //                 <Route default component={() => <h3>Page Not Found</h3>} />
-            //             </Switch>
-            //         </BrowserView>
-            //     </div>
-            // </Router>
+            <Router>
+                <Container>
+                    <MobileView>
+                        <h3>Mobile Navbar</h3>
+                        <Switch>
+                            {/* <Route exact path='/' component={Test} /> */}
+                            <Route default component={() => <h3>Page Not Found</h3>} />
+                        </Switch>
+                    </MobileView>
+                    <BrowserView>
+                        <h3>Browser Navbar</h3>
+                        <Switch>
+                            <Route exact path='/' component={Foo} />
+                            <Route default component={() => <h3>Page Not Found</h3>} />
+                        </Switch>
+                    </BrowserView>
+                </Container>
+            </Router>
         )
     }
 }

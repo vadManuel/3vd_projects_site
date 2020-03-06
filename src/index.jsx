@@ -1,5 +1,4 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css'
 import ReactDOM from 'react-dom'
 import { ReactReduxFirebaseProvider } from 'react-redux-firebase'
 import { Provider } from 'react-redux'
